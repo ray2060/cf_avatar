@@ -1,5 +1,5 @@
 import logging
-import sys, time
+import sys, datetime
 
 from helpers import codeforces_helper, image_helper
 from settings import *
@@ -31,8 +31,8 @@ if __name__ == '__main__':
     background_color = codeforces_helper.get_color_by_rank(rank)
     image_data = image_helper.generate(rank, rating, background_color,
                                        AVATAR_WIDTH, AVATAR_HEIGHT)
-    timestamp = int(time.time())
-    filename = f'{user_name}_{timestamp}.png'
+    time_now = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+    filename = f'{time_now}_{user_name}.png'
 
     with open(filename, 'wb') as f:
         f.write(image_data)

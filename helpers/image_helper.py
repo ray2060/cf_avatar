@@ -1,18 +1,21 @@
 import io
 from PIL import Image, ImageDraw, ImageFont
-
+from .codeforces_helper import get_font_size_by_rank
 
 def generate(rank, rating, background_color, width, height):
     image = Image.new('RGBA', (width, height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)
 
     try:
-        font_rank = ImageFont.truetype('fonts/Iosevka-Bold.ttc', 36)
+        font_rank = ImageFont.truetype('fonts/Iosevka-Bold.ttc', get_font_size_by_rank(rank))
         font_rating = ImageFont.truetype('fonts/Iosevka-Bold.ttc', 36)
     except:
         font_rank = ImageFont.load_default()
         font_rating = ImageFont.load_default()
 
+    # Fill background
+    draw.rectangle([(0, 0), (width, height)], fill="white")
+    
     # Draw a rectangel with the background color
     rect_height = height // 4
     rect_y = (height - rect_height) // 2
